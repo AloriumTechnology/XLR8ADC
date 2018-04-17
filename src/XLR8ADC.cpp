@@ -1,9 +1,9 @@
 /*--------------------------------------------------------------------
- Copyright (c) 2016 Alorim Technology.  All right reserved.
+ Copyright (c) 2016 Alorium Technology.  All right reserved.
  This library takes advantage of the high-performance ADC found
  on an XLR8 board. It is a 12-bit ADC (versus Arduino's 10bit)
  and can perform at higher sampling rates than Arduino.
- Written by Matt Weber (linkedin.com/in/mattweberdesign) of
+ Written by Matt Weber (support@aloriumtech.com) of
  Alorium Technology (info@aloriumtech.com)
  
  
@@ -35,6 +35,16 @@ XLR8adcClass XLR8ADC;
 void XLR8adcClass::begin() {
   // Assume that if you're using this library you probably want 12 bit mode
   set12bitMode();
+}
+void XLR8adcClass::setArduinoMode() {
+  // Set the ADC to divide by 128, default Arduino operating speed, ~9.6KS/sec
+  ADCSRA &= 0xF8;
+  ADCSRA |= 0x07;
+}
+void XLR8adcClass::setXLR8Mode() {
+  // Set the ADC to divide by 4, maximum XLR8 operating speed, ~254KSa/sec
+  ADCSRA &= 0xF8;
+  ADCSRA |= 0x02;
 }
 void XLR8adcClass::end() {
   // Assume that if you're returning to non-XLR8, you probably want 10 bit mode to match Arduino

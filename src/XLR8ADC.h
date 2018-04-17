@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------
- Copyright (c) 2016 Alorim Technology.  All right reserved.
+ Copyright (c) 2016 Alorium Technology.  All right reserved.
  This library takes advantage of the high-performance ADC found
  on an XLR8 board. It is a 12-bit ADC (versus Arduino's 10bit)
  and can perform at higher sampling rates than Arduino.
@@ -9,7 +9,7 @@
  AVR registers. Simply instantiating a
  
  
- Written by Matt Weber (linkedin.com/in/mattweberdesign) of
+ Written by Matt Weber (support@aloriumtech.com) of
  Alorium Technology (info@aloriumtech.com)
 
  
@@ -47,6 +47,10 @@ class XLR8adcClass {
   inline static void set10bitMode() { XLR8ADCR &= ~_BV(AD12EN); }
   inline static bool is12bitMode() { return  (XLR8ADCR & _BV(AD12EN)); }
   inline static bool is10bitMode() { return !(XLR8ADCR & _BV(AD12EN)); }
+  static void setArduinoMode();
+  static void setXLR8Mode();
+  inline static bool isArduinoMode() { return (ADCSRA & B00000111) == B00000111; }
+  inline static bool isXLR8Mode()    { return (ADCSRA & B00000111) == B00000010; }
   static void end();
   private:
   // Placeholder to remind myself that any variables we add in the future probably
