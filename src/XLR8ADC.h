@@ -36,7 +36,7 @@
 // #ARDUINO_XLR8 is passed from IDE to the compiler if XLR8 is selected properly
 #ifdef ARDUINO_XLR8
 
-#define XLR8ADCR   _SFR_MEM8(0x7d)
+#define XLR8ADCR   _SFR_MEM8(0x7F)
 #define AD12EN 7
 class XLR8adcClass {
   public:
